@@ -276,7 +276,7 @@ unsafe public partial class Renderer
                                 offsets += pixelOffsets[(int) (VideoStream.PixelComps[i].offset / Math.Ceiling(VideoStream.PixelComp0Depth / 8.0))];
 
                             curPSUniqueId += offsets;
-
+                            
                             if (VideoStream.PixelComps.Length > 3)
                                 SetPS(curPSUniqueId, $"color = Texture1.Sample(Sampler, input.Texture).{offsets};");
                             else
@@ -557,8 +557,8 @@ color = float4(Texture1.Sample(Sampler, input.Texture).rgb, 1.0);
 
             //AV_PIX_FMT_FLAG_ALPHA (currently used only for RGBA?)
             //context.OMSetBlendState(curPSCase == PSCase.RGBPacked || (curPSCase == PSCase.RGBPlanar && VideoStream.PixelPlanes == 4) ? blendStateAlpha : null);
-            context.OMSetBlendState(curPSCase == PSCase.RGBPacked ? blendStateAlpha : null);
-            
+            //context.OMSetBlendState(curPSCase == PSCase.RGBPacked ? blendStateAlpha : null);
+
             Log.Debug($"Prepared planes for {VideoStream.PixelFormatStr} with {videoProcessor} [{curPSCase}]");
 
             return true;

@@ -16,7 +16,7 @@ namespace FlyleafPlayer__Custom___MVVM_
         public Player Player        { get; set; }
         public Config Config        { get; set; }
 
-        public string SampleVideo   { get; set; } = Utils.FindFileBelow("Sample.mp4");
+        public string SampleVideo   { get; set; } = Utils.FindFileBelow("qie.png");
         public string LastError     { get => _LastError; set { if (_LastError == value) return; _LastError = value;  PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LastError))); } }
         string _LastError;
 

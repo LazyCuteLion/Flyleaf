@@ -875,9 +875,10 @@ public class FlyleafHost : ContentControl, IHostPlayer, IDisposable
     {
         // Required to handle mouse events as the window's background will be transparent
         // This does not set the background color we do that with the renderer (which causes some issues eg. when returning from fullscreen to normalscreen)
+        // background设置为透明，将不能响应鼠标操作，所以透明时设置为#01000000(最低透明度，会稍微影响色彩)
         Surface.Content = new Border()
         {
-            Background          = Brushes.Black,
+            Background          = (this.Background==Brushes.Transparent||this.Background==null)?new SolidColorBrush(Color.FromArgb(0x01,0,0,0)):this.Background,
             HorizontalAlignment = HorizontalAlignment.Stretch,
             VerticalAlignment   = VerticalAlignment.Stretch,
             CornerRadius        = CornerRadius,
@@ -2172,8 +2173,6 @@ public class FlyleafHost : ContentControl, IHostPlayer, IDisposable
         }
         else
         {
-            Surface.WindowState = WindowState.Normal;
-
             if (IsAttached)
             {
                 Attach(true);
@@ -2191,8 +2190,12 @@ public class FlyleafHost : ContentControl, IHostPlayer, IDisposable
             if (Player != null)
                 Player.renderer.CornerRadius = CornerRadius;
 
+            var content = Surface.Content as Border;
             if (CornerRadius != zeroCornerRadius)
-                ((Border)Surface.Content).CornerRadius = CornerRadius;
+                content.CornerRadius = CornerRadius;
+
+            //最后再修改WindowState，否则背景丢失
+            Surface.WindowState = WindowState.Normal;
         }
     }
     public void SetRect(ref Rect rect)

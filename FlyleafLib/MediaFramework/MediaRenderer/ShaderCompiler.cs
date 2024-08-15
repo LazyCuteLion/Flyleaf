@@ -364,6 +364,8 @@ float4 main(PSInput input) : SV_TARGET
     color *= contrast * 2.0f;
     color += brightness - 0.5f;
 
+    if(color.a < 1.0f)
+        color.rgb *= color.a;
 	return color;
 }
 ";

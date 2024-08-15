@@ -123,7 +123,7 @@ public unsafe partial class Renderer
         else
         {
             context.OMSetRenderTargets(backBufferRtv);
-            context.ClearRenderTargetView(backBufferRtv, Config.Video._BackgroundColor);
+            //context.ClearRenderTargetView(backBufferRtv, Config.Video._BackgroundColor);
             context.RSSetViewport(GetViewport);
             context.PSSetShaderResources(0, frame.srvs);
             context.Draw(6, 0);
@@ -243,7 +243,7 @@ public unsafe partial class Renderer
                     PresentInternal(LastFrame);
                 else if (Config.Video.ClearScreen)
                 {
-                    context.ClearRenderTargetView(backBufferRtv, Config.Video._BackgroundColor);
+                    //context.ClearRenderTargetView(backBufferRtv, Config.Video._BackgroundColor);
                     swapChain.Present(Config.Video.VSync, PresentFlags.None);
                 }
             }
